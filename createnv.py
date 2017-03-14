@@ -1,7 +1,5 @@
 import pymysql
-from config import config
-
-RUN_LEVEL = 'development'
+from config import config, RUN_LEVEL
 
 ############ MySQL ############
 

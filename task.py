@@ -1,7 +1,5 @@
 import redis
-from config import config
-
-RUN_LEVEL = 'development'
+from config import config, RUN_LEVEL
 
 redis_pool = redis.ConnectionPool(host='localhost', port=config[RUN_LEVEL].REDIS_PORT,
                             db=config[RUN_LEVEL].REDIS_DB)

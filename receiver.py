@@ -1,20 +1,16 @@
-import sys
 import redis
 import socket
 import pymysql
-from config import config
-
-RUN_LEVEL = 'development'
+from common import print_error
+from config import config, RUN_LEVEL
 
 # commit frequency
 COMMIT_COUNT = 0
 COMMIT_FRE = 10
 
-def print_error(*obj):
-    print("Error:", *obj, file=sys.stderr)
 
 def log_write(addr, mess):
-    global COMMIT_COUNT, COMMIT_FRE, RUN_LEVEL
+    global COMMIT_COUNT, COMMIT_FRE
     COMMIT_COUNT = (COMMIT_COUNT + 1) % COMMIT_FRE
     record = "INSERT INTO {0}(equip_ip, equip_port, message) VALUES(INET_ATON('{1[0]}'), {1[1]}, '{2}')".format(config[RUN_LEVEL].MYSQL_LOG_TAB, addr, mess.decode('latin1'))
     print(record)
@@ -25,7 +21,7 @@ def log_write(addr, mess):
     # select hex(message) from log_tab where equip_ip=INET_ATON('192.168.1.10')
     type = mess[1]
     if type == 2:   # req package
-        db_redis.lpush(config[RUN_LEVEL].REDIS_REQ_QUEUE, 'request task {}'.format(COMMIT_COUNT))
+        ccc
     elif type == 3: # ack package
         db_redis.lpush(config[RUN_LEVEL].REDIS_ACK_QUEUE, 'ack task {}'.format(COMMIT_COUNT))
     else:           # status package

@@ -15,6 +15,7 @@ class DevelopmentConfig(Config):
     REDIS_DB = 0
     REDIS_REQ_QUEUE = 'reqlist'
     REDIS_ACK_QUEUE = 'acklist'
+    REDIS_SND_QUEUE = 'sndlist'
     MYSQL_PORT = 3306
     MYSQL_USER = 'root'
     MYSQL_PASSWD = 'welcome'
@@ -32,3 +33,5 @@ config = {
 
     'default': DevelopmentConfig
 }
+
+RUN_LEVEL = 'development'
